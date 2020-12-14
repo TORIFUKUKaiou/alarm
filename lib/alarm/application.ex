@@ -15,6 +15,7 @@ defmodule Alarm.Application do
         # Children for all targets
         # Starts a worker by calling: Alarm.Worker.start_link(arg)
         # {Alarm.Worker, arg},
+        Alarm.Scheduler
       ] ++ children(target())
 
     Supervisor.start_link(children, opts)
@@ -34,6 +35,9 @@ defmodule Alarm.Application do
       # Children for all targets except host
       # Starts a worker by calling: Alarm.Worker.start_link(arg)
       # {Alarm.Worker, arg},
+      Alarm.Observer,
+      Alarm.SetInterrupter,
+      Alarm.Buzzer.State
     ]
   end
 

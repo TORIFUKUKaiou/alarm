@@ -31,3 +31,8 @@ if Mix.target() == :host or Mix.target() == :"" do
 else
   import_config "target.exs"
 end
+
+config :alarm, Alarm.Scheduler,
+  jobs: [
+    {"0 22 * * *", {Alarm.Buzzer.State, :toggle, []}}
+  ]
